@@ -1,6 +1,6 @@
 <?php
 session_start();
-$konstruktor ="data_administrator";
+$konstruktor ="data_agama";
 require_once '../database/config.php'
 ?>
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ require_once '../database/config.php'
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <title>SIFO SLB | Data Administrator</title>
+  <title>SIFO SLB | Data Agama</title>
 
   <?php
   include '../listlink.php';
@@ -81,12 +81,12 @@ body tag options:
             <div class="col-lg-12">
         <div class="card">
               <div class="card-header" style="background-color:#003399">
-                <h3 class="card-title"><font color="#ffffff"><i class="fa-solid fa-folder"></i> Data Admin " Administrator</font></h3>
+                <h3 class="card-title"><font color="#ffffff"><i class="fa-solid fa-folder"></i> Data Agama</font></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
               <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-tambahdata">
-               <i class="nav-icon fas fa-plus"></i> Tambah Data
+               <i class="nav-icon fas fa-plus"></i> Tambah Agama
               </button>
               <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-resetdata">
                <i class="nav-icon fas fa-rotate-right"></i> Reset
@@ -97,8 +97,6 @@ body tag options:
                   <thead>
                   <tr>
                     <th width="5%"><center>No</center></th>
-                    <th><center>Username</center></th>
-                    <th><center>Nama</center></th>
                     <th><center>Agama</center></th>
                     <th><center>Aksi</center></th>
                   </tr>
@@ -106,47 +104,29 @@ body tag options:
                   <tbody>
                     <?php 
                     $no = 1;
-                    $sqlpanggilpengguna = mysqli_query($koneksi, "SELECT * FROM tbl_pengguna") or die (mysqli_error($koneksi));
+                    $sqlpanggilagama = mysqli_query($koneksi, "SELECT * FROM tbl_agama") or die (mysqli_error($koneksi));
                     
-                    if (mysqli_num_rows($sqlpanggilpengguna) > 0) {
+                    if (mysqli_num_rows($sqlpanggilagama) > 0) {
                         //jika ada data pada database
                     
 
                         // lakukan perulangan pemanggilan data
-                        while ($data = mysqli_fetch_array($sqlpanggilpengguna)) {
+                        while ($data = mysqli_fetch_array($sqlpanggilagama)) {
                     
                     ?>
 
                   <tr>
                     <td><center><?=$no++?></center></td>
-                    <td><?=$data['user'];?></td>
-                    <td><?=$data['nama'];?></td>
-                    <td>
-                      <?php
-                        // punya modal apa?
-                        $nekad = $data['kode_agama'];
-
-                        // panggil query agama
-                        $querynekad = mysqli_query($koneksi, "SELECT agama FROM tbl_agama WHERE Id = '$nekad'") 
-                        or die (mysqli_error($koneksi));
-
-                        // tampung array dari query
-                        $tampungnekad = mysqli_fetch_array($querynekad);
-
-                        // tampilkan berdasarkan nama kolom pada database
-                        $agama = $tampungnekad['agama'];
-                        ?>
-                        <?=$agama;?>
-                    </td>
+                    <td><?=$data['agama'];?></td>
                     <td>
                       <center>
-                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-edit"
-                          data-nik="<?=$data['nik'];?>" data-us="<?=$data['user'];?>" data-na="<?=$data['nama'];?>">
+                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-editdata"
+                          data-edid="<?=$data['id'];?>" data-edagama="<?=$data['agama'];?>">
                           <i class="nav-icon fas fa-edit"></i> Edit
                         </button>
 
-                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-default"
-                          data-nik="<?=$data['nik'];?>" data-us="<?=$data['user'];?>" data-na="<?=$data['nama'];?>">
+                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-hapus"
+                          data-hpid="<?=$data['id'];?>" data-hpagama="<?=$data['agama'];?>">
                           <i class="nav-icon fas fa-trash"></i>
                         </button>
                       </center>
@@ -159,7 +139,7 @@ body tag options:
                     else
                     {
                         //jika tidak ada data pada database
-                        echo "<tr><td colspan=\"4\" align=\"center\"><h5> Dataa kosong bjir!! </h5></td></tr>";
+                        echo "<tr><td colspan=\"4\" align=\"center\"><h5> Data kosong bjir!! </h5></td></tr>";
                     }
                     ?>
                 </table>
@@ -187,33 +167,28 @@ body tag options:
  ?>
 </div>
 
-<div class="modal fade" id="modal-default">
+<div class="modal fade" id="modal-hapus">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header" style="background-color:#003399">
-              <h5 class="modal-title"><strong><font color="#ffffff">Hapus Data Pengguna</font></strong></h5>
+              <h5 class="modal-title"><strong><font color="#ffffff">Hapus Data Agama</font></strong></h5>
               </button>
             </div>
-      <form class="form-horizontal" action="hapus.php" method="POST" id="hapusdata">
+      <form class="form-horizontal" action="proses.php" method="POST" id="hapusdata">
             <div class="modal-body">
               <table>
                 <th>
                   <tb>
                     <tr>
-                      <td width="30%">NIK</td>
+                      <td width="30%">ID</td>
                       <td width="5%">:</td>
-                      <td><input type="text" name="nikterpilih" class="form-control" hidden></input>
-                      <input type="text" name="nikterpilih2" class="form-control" disabled></input></td>
+                      <td><input type="text" name="hp_id" class="form-control" hidden></input>
+                      <input type="text" name="hp_id2" class="form-control"></input></td>
                     </tr>
                     <tr>
-                      <td width="30%">Nama Pengguna</td>
+                      <td width="30%">Agama</td>
                       <td width="5%">:</td>
-                      <td><input type="text" name="namaterpilih" class="form-control"></input></td>
-                    </tr>
-                    <tr>
-                      <td width="30%">Username</td>
-                      <td width="5%">:</td>
-                      <td><input type="text" name="userterpilih" class="form-control"></input></td>
+                      <td><input type="text" name="hp_agama" class="form-control"></input></td>
                     </tr>
                   </tb>
                 </th>
@@ -230,33 +205,28 @@ body tag options:
         <!-- /.modal-dialog -->
       </div>
 
-      <div class="modal fade" id="modal-edit">
+      <div class="modal fade" id="modal-editdata">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header" style="background-color:#003399">
               <h5 class="modal-title"><strong><font color="#ffffff">Edit Data Pengguna</font></strong></h5>
               </button>
             </div>
-      <form class="form-horizontal" action="edit.php" method="POST" id="editdata">
+      <form class="form-horizontal" action="proses.php" method="POST" id="editdata">
             <div class="modal-body">
-              <table>
+               <table>
                 <th>
                   <tb>
                     <tr>
-                      <td width="30%">NIK</td>
+                      <td width="30%">ID</td>
                       <td width="5%">:</td>
-                      <td><input type="text" name="ed_nikterpilih" class="form-control" hidden></input>
-                      <input type="text" name="ed_nikterpilih2" class="form-control" disabled></input></td>
+                      <td><input type="text" name="ed_id" class="form-control" hidden></input>
+                      <input type="text" name="ed_id2" class="form-control" disabled></input></td>
                     </tr>
                     <tr>
-                      <td width="30%">Nama Pengguna</td>
+                      <td width="30%">Agama</td>
                       <td width="5%">:</td>
-                      <td><input type="text" name="ed_namaterpilih" class="form-control"></input></td>
-                    </tr>
-                    <tr>
-                      <td width="30%">Username</td>
-                      <td width="5%">:</td>
-                      <td><input type="text" name="ed_userterpilih" class="form-control"></input></td>
+                      <td><input type="text" name="ed_agama" class="form-control"></input></td>
                     </tr>
                   </tb>
                 </th>
@@ -264,7 +234,7 @@ body tag options:
             </div>
             <div class="modal-footer justify-content-right">
               <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-              <button type="submit" name="edit" class="btn btn-primary">Edit</button>
+              <button type="submit" name="editdata" class="btn btn-primary">Edit</button>
             </div>
       </form>
           </div>
@@ -277,34 +247,20 @@ body tag options:
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header" style="background-color:#003399">
-              <h5 class="modal-title"><strong><font color="#ffffff">Tambah Data Pengguna</font></strong></h5>
+              <h5 class="modal-title"><strong><font color="#ffffff">Tambah Data Agama</font></strong></h5>
               </button>
             </div>
-      <form class="form-horizontal" action="tambahdata.php" method="POST" id="tambahdata">
+      <form class="form-horizontal" action="proses.php" method="POST" id="tambahdata">
             <div class="modal-body">
               <div class="form-group">
-                    <label for="nik">NIK</label>
-                    <input type="text" class="form-control" id="nik" name="nik" placeholder="Input NIK">
-                    <br>
-                    <label for="nik">Nama</label>
-                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Input Nama">
-                    <br>
-                    <label for="nik">Username</label>
-                    <input type="text" class="form-control" id="user" name="user" placeholder="Input Username">
+                    <label for="nik">Agama</label>
+                    <input type="text" class="form-control" id="agama" name="agama" placeholder="Input Agama">
               </div>
-              <select class="custom-select form-control-border" id="kode_agama">
-                    <option>-- Pilih Agama --</option>
-                    <?php
-                    $panggilagama = mysqli_query($koneksi, "SELECT * FROM tbl_agama") or die (mysqli_error($koneksi));
-                    while($dt_agama=mysqli_fetch_array($panggilagama)){
-                      echo "<option value='$dt_agama[agama]'>$dt_agama[agama]</option>";
-                    }
-                    ?>
-                  </select>
+              </select>
             </div>
             <div class="modal-footer justify-content-right">
               <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-              <button type="submit" name="tambah" class="btn btn-primary">Tambah Data</button>
+              <button type="submit" name="tambahdata" class="btn btn-primary">Tambah Data</button>
             </div>
       </form>
           </div>
@@ -318,33 +274,28 @@ include '../script.php';
 ?>
 
 <script type="text/javascript">
-  $('#modal-default').on('show.bs.modal', function(e) {
+  $('#modal-hapus').on('show.bs.modal', function(e) {
 
-      var ni = $(e.relatedTarget).data('nik');
-      var u = $(e.relatedTarget).data('us');
-      var n = $(e.relatedTarget).data('na');
+      var hpid = $(e.relatedTarget).data('hpid');
+      var hpagama = $(e.relatedTarget).data('hpagama');
 
-      $(e.currentTarget).find('input[name="nikterpilih"]').val(ni);
-      $(e.currentTarget).find('input[name="nikterpilih2"]').val(ni);
-      $(e.currentTarget).find('input[name="userterpilih"]').val(u);
-      $(e.currentTarget).find('input[name="namaterpilih"]').val(n);
+      $(e.currentTarget).find('input[name="hp_id"]').val(hpid);
+      $(e.currentTarget).find('input[name="hp_id2"]').val(hpid);
+      $(e.currentTarget).find('input[name="hp_agama"]').val(hpagama);
   });
 </script>
 
 <script type="text/javascript">
-  $('#modal-edit').on('show.bs.modal', function(e) {
+  $('#modal-editdata').on('show.bs.modal', function(e) {
 
-      var ed_ni = $(e.relatedTarget).data('nik');
-      var ed_u = $(e.relatedTarget).data('us');
-      var ed_n = $(e.relatedTarget).data('na');
+      var edid = $(e.relatedTarget).data('edid');
+      var edagama = $(e.relatedTarget).data('edagama');
 
-      $(e.currentTarget).find('input[name="ed_nikterpilih"]').val(ed_ni);
-      $(e.currentTarget).find('input[name="ed_nikterpilih2"]').val(ed_ni);
-      $(e.currentTarget).find('input[name="ed_userterpilih"]').val(ed_u);
-      $(e.currentTarget).find('input[name="ed_namaterpilih"]').val(ed_n);
+      $(e.currentTarget).find('input[name="ed_id"]').val(edid);
+      $(e.currentTarget).find('input[name="ed_id2"]').val(edid);
+      $(e.currentTarget).find('input[name="ed_agama"]').val(edagama);
   });
 </script>
-
 
 </body>
 </html>

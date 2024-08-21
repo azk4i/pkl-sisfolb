@@ -17,7 +17,7 @@ $queryhapuspengguna = mysqli_query($koneksi, "DELETE FROM tbl_pengguna WHERE nik
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    swal("Berhasil", "Cata Pengguna telah di hapus", "error");
+    swal("Berhasil", "Cata Pengguna telah di hapus", "success");
 
     setTimeout(function() {
         window.location.href = "../backend_data_administrator";

@@ -10,9 +10,19 @@
           </li>
           <li class="nav-item">
             <a href="../backend_data_administrator" class="nav-link <?php if ($konstruktor=='data_administrator'){echo 'active';}?>">
-              <i class="nav-icon fas fa-user-check"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>
                 Data Administrator
+              </p>
+            </a>
+          </li>
+
+          </li>
+          <li class="nav-item">
+            <a href="../backend_data_agama" class="nav-link <?php if ($konstruktor=='data_agama'){echo 'active';}?>">
+              <i class="nav-icon fa-solid fa-star-and-crescent"></i>
+              <p>
+                Data Agama
               </p>
             </a>
           </li>

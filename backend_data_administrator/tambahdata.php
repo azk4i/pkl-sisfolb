@@ -36,7 +36,7 @@ else
     '$unique',
     '$user',
     '$pass',
-    '$nama')")
+    '$nama',)")
     or die (mysqli_error($koneksi));
 ?>
 
