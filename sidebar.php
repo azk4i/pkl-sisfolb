@@ -29,6 +29,16 @@
 
           </li>
           <li class="nav-item">
+            <a href="../backend_data_agama" class="nav-link <?php if ($konstruktor=='master_data'){echo 'active';}?>">
+              <i class="nav-icon fa-solid fa-database"></i>
+              <p>
+                Master Data
+              </p>
+            </a>
+          </li>
+
+          </li>
+          <li class="nav-item">
             <a href="../auth/logout.php" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>

@@ -1,7 +1,9 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
+ 
+<!-- AdminLTE App -->
+<script src="../assets_adminlte/dist/js/adminlte.min.js"></script>
 <!-- jQuery -->
 <script src="../assets_adminlte/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -20,5 +22,3 @@
 <script src="../assets_adminlte/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="../assets_adminlte/plugins/toastr/toastr.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../assets_adminlte/dist/js/adminlte.min.js"></script>

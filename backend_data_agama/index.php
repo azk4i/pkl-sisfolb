@@ -269,6 +269,33 @@ body tag options:
         <!-- /.modal-dialog -->
       </div>
 
+       <div class="modal fade" id="modal-resetdata">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:#003399">
+              <h5 class="modal-title"><strong><font color="#ffffff">Reset Data Agama</font></strong></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+      <form class="form-horizontal" action="proses.php" method="POST" id="resetdata">
+            <div class="modal-body">
+              <h5>
+                <br>Perhatian, anda akan mereset data!!<br>
+             </h5>
+             </p>
+            </div>
+              <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" name="reset" class="btn btn-primary">Ya Reset Data</button>
+            </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
 <?php
 include '../script.php';
 ?>
