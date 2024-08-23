@@ -29,7 +29,7 @@
 
           </li>
           <li class="nav-item">
-            <a href="../backend_data_agama" class="nav-link <?php if ($konstruktor=='master_data'){echo 'active';}?>">
+            <a href="../backend_master_data" class="nav-link <?php if ($konstruktor=='master_data'){echo 'active';}?>">
               <i class="nav-icon fa-solid fa-database"></i>
               <p>
                 Master Data

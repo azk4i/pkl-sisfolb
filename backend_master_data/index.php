@@ -1,6 +1,6 @@
 <?php
 session_start();
-$konstruktor ="data_agama";
+$konstruktor ="master_data";
 require_once '../database/config.php'
 ?>
 <!DOCTYPE html>
@@ -65,90 +65,23 @@ body tag options:
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-12">
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+        <div class="container-fluid">
+        
+        </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+
     <!-- Main content -->
-          <div class="card">
-              <div class="card-header" style="background-color:#003399">
-                <h3 class="card-title"><font color="#ffffff"><i class="fa-solid fa-folder"></i> Data Agama</font></h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-              <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-tambahdata">
-               <i class="nav-icon fas fa-plus"></i> Tambah Agama
-              </button>
-              <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-resetdata">
-               <i class="nav-icon fas fa-rotate-right"></i> Reset
-              </button>
-                <table id="example1" class="table table-bordered table-sm">
-                  <thead>
-                  <tr>
-                    <th width="5%"><center>No</center></th>
-                    <th><center>Agama</center></th>
-                    <th><center>Aksi</center></th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <?php 
-                    $no = 1;
-                    $sqlpanggilagama = mysqli_query($koneksi, "SELECT * FROM tbl_agama") or die (mysqli_error($koneksi));
-                    
-                    if (mysqli_num_rows($sqlpanggilagama) > 0) {
-                        //jika ada data pada database
-                    
+    <div class="content">
+        
+        <strong>Ini adalah halaman Master data</strong>
 
-                        // lakukan perulangan pemanggilan data
-                        while ($data = mysqli_fetch_array($sqlpanggilagama)) {
-                    
-                    ?>
-
-                  <tr>
-                    <td><center><?=$no++?></center></td>
-                    <td><?=$data['agama'];?></td>
-                    <td>
-                      <center>
-                        <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-editdata"
-                          data-edid="<?=$data['id'];?>" data-edagama="<?=$data['agama'];?>">
-                          <i class="nav-icon fas fa-edit"></i> Edit
-                        </button>
-
-                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal-hapus"
-                          data-hpid="<?=$data['id'];?>" data-hpagama="<?=$data['agama'];?>">
-                          <i class="nav-icon fas fa-trash"></i>
-                        </button>
-                      </center>
-                    </td> 
-                  </tr>
-                  <?php
-
-                        }
-                    }
-                    else
-                    {
-                        //jika tidak ada data pada database
-                        echo "<tr><td colspan=\"4\" align=\"center\"><h5> Data kosong bjir!! </h5></td></tr>";
-                    }
-                    ?>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-      </div>
-      <!-- /.container-fluid -->
     </div>
     <!-- /.content -->
-  </div>
+</div>
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
@@ -316,43 +249,6 @@ include '../script.php';
       $(e.currentTarget).find('input[name="ed_id"]').val(edid);
       $(e.currentTarget).find('input[name="ed_id2"]').val(edid);
       $(e.currentTarget).find('input[name="ed_agama"]').val(edagama);
-  });
-</script>
-
-<script src="../assets_adminlte/dist/js/adminlte.min.js"></script>
-<script src="../assets_adminlte/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="../assets_adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="../assets_adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../assets_adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../assets_adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../assets_adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../assets_adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../assets_adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../assets_adminlte/plugins/jszip/jszip.min.js"></script>
-<script src="../assets_adminlte/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../assets_adminlte/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../assets_adminlte/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../assets_adminlte/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../assets_adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../assets_adminlte/dist/js/adminlte.min.js"></script>
-<!-- Page specific script -->
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
   });
 </script>
 
